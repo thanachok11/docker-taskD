@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"  # Map port 8080 on host to port 80 on the container
+    depends_on:
+      - backend
+    networks:
+      - frontend_network
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    networks:
+      - frontend_network
+
+networks:
+  frontend_network:
+    driver: bridge
